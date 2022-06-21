@@ -1,10 +1,6 @@
 # པ་ཀྲ་ཧེ་། Bazahei: The first ICP-XRP cross-chain NFT
 #### Building for Dfinity Supernova Hackthon in 2022
 
-<p align="center">
-  <img src="https://github.com/Itoka-DAO/IC-XRP/blob/main/Bazahei_cover.png">
-</p>
-
 ## ***Introduction***
 The Internet Computer Protocol (ICP) is the fastest and most scalable general-purpose blockchain. It extends the Internet with computation: ICP allows Dapps to run 100% on-chain as it can serve web contents directly on browsers. Compared to Ethereum, the ICP is cheaper, faster, upgradable and fall-stack development friendly. Since the ICP community has established one of the strongest GameFi&SocialFi ecologies in the world, the NFT digital assets based on ICP are rising due to the straight path to the ecology. In 2022, the NFT projects launched on ICP are exponentially growing, but the value of the total assets is suppressed by the bear market of ICP native tokens. 
 
@@ -75,13 +71,6 @@ The project is developed by 6 components:
 [5] **A serverless XRP issuer** with its own IC identity to handle XRP mining and burning operations. The issuer can verify the user’s principal and XRP keys, token ownership from the IC NFT canister, state of which blockchain and call {ic2xrp} and {xrp2ic} from the bridge canister.
 
 [6] **A frontend** for showcase gallery and verify if the cross-chain transaction is successful.  
-<br />
-<br />
-
-### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A Bidirectional cross-chain scheme implementation
-<p align="center">
-  <img src="https://github.com/Itoka-DAO/IC-XRP/blob/main/scheme.png">
-</p>
 
 ## ***Transaction flow***
 
@@ -91,13 +80,13 @@ The project is developed by 6 components:
 
 2. Query the XRP keys by IC authentication. If the user is new, pass a valid XRP account setXRPAccount from the XRP manager canister to set up the bounding of principal and XRP keys. To seamlessly authenticate the new users, we call XRPL API to generate an account and store it in a canister in our frontend. 
 
-3. POST request to mint a XRP NFT with {principal, XRP keys, and tokenIdx} payload. Then serverless starts the serial tests. (1) verify the principal and keys and a correct mapping from the XRP manager canister. [IC2XRP #5] (2) verify token staking if it has been pledged on a bridge. [IC2XRP #6] (3) verify the underlying NFT if the state is still on IC. [IC2XRP #7]  If all tests pass, query the metadata and call {ic2xrp} from bridge canister to update the cross-chain ledger to switch the state [IC2XRP #8] and mint the XRP NFT to user’s XRP account. 
+3. POST request to mint a XRP NFT with {principal, XRP keys, and tokenIdx} payload. Then serverless starts the serial tests. (1) verify the principal and keys and a correct mapping from the XRP manager canister[ IC2XRP #5 ] (2) verify token staking if it has been pledged on a bridger[ IC2XRP #6 ] (3) verify the underlying NFT if the state is still on IC. [IC2XRP #7]  If all tests pass, query the metadata and call {ic2xrp} from bridge canister to update the cross-chain ledger to switch the state [IC2XRP #8] and mint the XRP NFT to user’s XRP account. 
 
 ### **XRP2IC**
 
 1. Query the XRP keys by IC authentication. Similarly to above.
 
-2. POST request to burn XRP NFT with {principal, XRP keys, and NFTokenID} payload and start the serial tests. (1) verify the principal and keys and a correct mapping from the XRP manager canister. [XRP2IC #3]. (2) verify token ownership if the user is the owner. [XRP2IC #4]. (3) verify the underlying NFT if the state is still on IC[XRP2IC #5] (could be omitted since ownership applied).  If all tests pass, burn the NFT on XRPL [XRP2IC #6] and call {xrp2ic} from bridge canister to update the cross-chain ledger to switch the state [XRP2IC #7], which invokes following a transaction operation to release NFT to the users[XRP2IC #8].
+2. POST request to burn XRP NFT with {principal, XRP keys, and NFTokenID} payload and start the serial tests. (1) verify the principal and keys and a correct mapping from the XRP manager canister. [XRP2IC #3]. (2) verify token ownership if the user is the owner. [XRP2IC #4]. (3) verify the underlying NFT if the state is still on IC[ XRP2IC #5 ] (could be omitted since ownership applied).  If all tests pass, burn the NFT on XRPL [XRP2IC #6] and call {xrp2ic} from bridge canister to update the cross-chain ledger to switch the state [XRP2IC #7], which invokes following a transaction operation to release NFT to the users[XRP2IC #8].
 
 ## **Security analysis**
 
@@ -143,10 +132,6 @@ The Itoka team will airdrop all bazahei NFTs to communities for free. To evaluat
 ## **Future work**
 
 There will be an upgrade for Bazahei when XRPL NFT-Dev merges to the main net. Besides, we are excited to wait for Dfinity to enable the “HTTP request from canister” and “threshold ECDSA sign” so we can approach a fully decentralized cross-chain protocol. Please check the following flowchart for our future system design(the final upgrade might be different): 
-
-<p align="center">
-  <img src="https://github.com/Itoka-DAO/IC-XRP/blob/main/upgrade.png">
-</p>
 
 Additionally, the marketplace is extremely important for secondary market trading. Due to the time limitation and project complexity, we would like to propose it as another independent project. The expected marketplace could be the extension of the frontend gallery with payment functions. The sellers can list their NFT in the marketplace by offering both prices of ICP and XRP. The buyers can authenticate by IC wallet and bid either price of IC or XRP. As a result, the trade should be seamless and the marketplace is expected to handle all cross-chain activity. 
 
