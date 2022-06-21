@@ -107,22 +107,22 @@ Solution: No. Users still can send a POST request to the serverless until the XR
 Problem #2: Suppose user1 is trying ic2xrp and completed staking on the bridge, but steal user2 XRP keys or generate a new keys and send a POST request with payload {user1_principal, user2_xrpKeys, tokenIdx}. Who would get the XRP NFT?
 Solution: None. The POST request will fail since cannot past the [IC2XRP #5]. It is impossible to steal the user2 keys from XRP manager only if user1 can hack the internet identity :)
 
-Problem #3: Suppose user1 is trying ic2xrp and completed staking token1 on the bridge, but user1 found there is token2 also staking on bridge by users2, so he send a POST request with payload {user1_principal, user1_xrpKeys, token2_tokenIdx}. Can he mint the token2 on XRP?  
+Problem #3: Suppose user1 is trying ic2xrp and completed staking token1 on the bridge, but user1 found there is token2 also staking on bridge by users2, so he send a POST request with payload {user1_principal, user1_xrpKeys, token2_tokenIdx}. Can he mint the token2 on XRP?
 Solution: No. The POST request will fail and cannot pass the [IC2XRP #6] by tracing previous staking history from the NFT ledger.
 
 Problem #4: Suppose a user is trying ic2xrp and sends POST requests twice to mint 2 NFTs on the XRP side. Does the user receive 2 XRP NFTs?
 Solution: No. The [IC2XRP #7] will prevent the second minting request. 
 
-Problem #5: Suppose a user listed the token1 in a marketplace and then tries ic2xrp cross-chain transaction. Can he still sell the NFT while receiving XRP NFT? 
+Problem #5: Suppose a user listed the token1 in a marketplace and then tries ic2xrp cross-chain transaction. Can he still sell the NFT while receiving XRP NFT
 Solution: No. The [IC2XRP #1#2] will clear the allowance or the NFT’s operator authorization, so the token will automatically be delisted from the marketplace if staked on the bridge. 
 
 Problem #6: Suppose a user has got the XRP NFT token1 and trades it to user2, can this person transfer the NFT to IC?
 Solution: Yes if the user2 signed up for an IC account by XRP manager. If not, transfer the NFT to a registered account and then perform the cross-chain transaction. 
  
-Problem #7: Suppose a user completed the ic2xrp and burned the token on XRPL manually. Can he still perform xrp2ic transactions flow to get the IC NFT? 
+Problem #7: Suppose a user completed the ic2xrp and burned the token on XRPL manually. Can he still perform xrp2ic transactions flow to get the IC NFT?
 Solution: No. The [XRP2IC #4] will prevent the operations. In fact, if the user manually burns NFT on the XRP side, the token will be permanently lost and stuck on the bridge. 
 
-Problem #8: Why is the IC NFT staking on the bridge while XRP NFT is burnt if it is crossed? 
+Problem #8: Why is the IC NFT staking on the bridge while XRP NFT is burnt if it is crossed?
 Solution: The EXT NFT standard does not support a burning mechanism, but XRPL supports. We adopt the EXT standard in this project since it is one of the most recognizable and easy to port on Entrepot marketplace. The developers can add the burning mechanism on NFT canister by sending the NFT to a “black hole” if needed. 
 
 Problem #9: Suppose a user1 steals user2’s XRP keys and their NFT token1 and tries to do xrp2ic. Can they perform the transaction?
